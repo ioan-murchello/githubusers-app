@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext, useCallback } from 'react';
 import mockUser from './mockData.js/mockUser';
 import mockRepos from './mockData.js/mockRepos';
 import mockFollowers from './mockData.js/mockFollowers';
@@ -60,7 +60,7 @@ const GithubProvider = ({ children }) => {
     setLoading(false);
   };
 
-  const checkRequests = () => {
+  const checkRequests = useCallback(() => {
     axios(`${rootUrl}/rate_limit`)
       .then(({ data }) => {
         let {
@@ -75,11 +75,11 @@ const GithubProvider = ({ children }) => {
         }
       })
       .catch((err) => console.log(err));
-  };
+  }, [setRequests]);
 
   useEffect(() => {
     checkRequests();
-  }, []);
+  }, [checkRequests]);
 
   return (
     <GithubContext.Provider
