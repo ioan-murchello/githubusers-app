@@ -4,7 +4,7 @@ import mockRepos from './mockData.js/mockRepos';
 import mockFollowers from './mockData.js/mockFollowers';
 import axios from 'axios';
 
-const rootUrl = process.env.REACT_API_URL;
+const rootUrl ='https://api.github.com'; 
 
 const GithubContext = createContext();
 
